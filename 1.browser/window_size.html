@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Window Size</title>
+</head>
+<style>
+  .tag {
+    display: inline-block;
+    background-color: rgb(238, 169, 181);
+    padding: 10px;
+    margin-top: 10px;
+  }
+  .content{
+    display: inline-block;
+    background-color: rgb(126, 147, 241);
+    padding: 10px;
+    margin-top: 10px;
+    position: absolute;
+    top: 250px;
+    left: 10px;
+  }
+</style>
+
+<body>
+  <div class="tag">Window Size</div>
+
+  <div class="content"> 
+    <strong>[브라우저 크기 개념 정리]</strong> <br/>
+      1. <strong>screen</strong> : 모니터 화면의 면적 (= 브라우저 바깥까지 모두 포함하는 면적) <br/>
+      2. <strong>outer</strong> : 화면page + 주소입력창 + scroll을 모두 포함한 면적  <br/>
+      3. <strong>inner</strong> : 화면page + scroll을 포함한 우리가 보통 보는 page 면적  <br/>
+      4. <strong>documentElement.clientWidth</strong> : 문서 자체 (scroll제외) 면적  <br/>
+  </div>
+
+  <script>
+    const tag = document.querySelector('.tag');
+    function updateTag() {
+      tag.innerHTML = `
+      <strong>[화면 resize할 때마다 가로,세로값 출력 하기]</strong> <br/>
+      <br/>
+      🖥모니터 화면의 크기 => window.screen : ${window.screen.width}, ${window.screen.height} <br/>
+      <br/>
+      🖥page를 넘은 브라우저의 크기 => window.outer : ${window.outerWidth}, ${window.outerHeight} <br/>
+      <br/>
+      💻브라우저 안쪽화면의 크기 => window.inner : ${window.innerWidth}, ${window.innerHeight} <br/>
+      <br/>
+      💻브라우저 documentElement.clientWidth : ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}
+      `;
+    }
+    
+    window.addEventListener('resize', () => {
+      updateTag()
+    });
+    updateTag()
+  </script>
+</body>
+
+</html>

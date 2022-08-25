@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DomReact</title>
+</head>
+
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+  }
+  div{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(171, 171, 171);
+    border: 1px solid #333;
+    margin-left: 30px;
+  }
+  .pick{
+    background-color: rgb(197, 91, 108);
+  }
+  aside{
+    position: fixed;
+    top : 10px;
+    right: 50px;
+    /* -webkit-transform: translateZ(0) */
+  }
+
+  input{
+    background-color: rgb(241, 241, 199);
+    width: 150px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1px solid #c8c8c8;
+    margin-right: 20px;
+    transition: 1s;
+  }
+
+  input:hover{
+    background-color: rgb(147, 147, 137);
+    color: #fff;
+  }
+</style>
+
+
+<body>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div class="pick"></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <aside>
+    <input type="button" value="scroll by 100px(Y)" class="by100"/>
+    <input type="button" value="scroll to 100px(Y)"class="to100"/>
+    <input type="button" value="scroll into pick" class="topick"/>
+  </aside>
+
+<script>
+  const pick = document.querySelector('.pick');
+  pick.addEventListener('click', e => {
+    //getBoundingClientRect()란?
+    //엘리먼트 크기와 뷰포트에 상대적인 위치 정보를 제공하는 DOMRect를 제공하는 메서드
+    //이런식 => DOMRect {x: 30, y:81, width:102, height:102, top:81, ...}
+    const rect = pick.getBoundingClientRect();
+    console.log(rect);
+    console.log(`client : ${e.clientX}, ${e.clientY}`); //보여지는 뷰포트 기준
+    console.log(`page : ${e.pageX}, ${e.pageY}`); //페이지 가장 끝 기준
+  })
+
+  //구현할 액션 3가지를 선언한다 
+  const by100 = document.querySelector('.by100');
+  const to100 = document.querySelector('.to100');
+  const topick = document.querySelector('.topick');
+
+  //1.100px씩 scroll
+  //참고 ) click한 event를 e라는 이름으로 전달해주는 개념 
+    by100.addEventListener('click', () => {
+    // window.scrollBy(0, 10); //범위.scrollBy(x축, y축, 행동옵션(smooth or auto))
+    window.scrollBy({top:100, left:0, behavior:'smooth'});
+  });
+
+  // 2. 100px 지점으로 이동
+  to100.addEventListener('click', () => {
+    window.scrollTo(0, 100);
+  });
+
+  // 3. 원하는 박스 지점으로 이동
+  topick.addEventListener('click', () => {
+    pick.scrollIntoView(); //pick이 있는 곳으로 이동 
+  })
+
+
+  
+
+
+
+
+</script>
+
+</body>
+</html>
