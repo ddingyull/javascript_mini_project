@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/94132462d8.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./main.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- modal -->
+  <!-- one way UI 애니메이션 (일방향 : A상태 -> B상태로) 
+  1. 시작스타일
+  2. 최종스타일 
+  3. 원할 때 최종스타일로 변하라고 코드짬 
+  4. transition 추가 -->
+  <div class="black-bg">
+    <div class="white-bg">
+      <h4>로그인하세요</h4>
+      <button class="btn btn-dark" id="close">닫기</button>
+    </div>
+  </div>
+
+  <!-- nav bar -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <span class="navbar-brand">Navbar</span>
+      <button class="navbar-toggler" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- sub nav bar -->
+  <ul class="list-group show">
+    <li class="list-group-item">An item</li>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+    <li class="list-group-item">A fourth item</li>
+    <li class="list-group-item">And a fifth one</li>
+  </ul>
+
+
+  <!-- onClick 버전 -->
+  <!-- <section>
+    <div class="alert_box">
+      알림창
+      <a class="btnClose" onclick="alertDisplay('none')">
+        <i class="fa-solid fa-xmark"></i>
+      </a>
+    </div>
+    <button class="btnOpen" onclick="alertDisplay('block', 'ID를 입력하세요')">ID</button>
+    <button class="btnOpen" onclick="alertDisplay('block', 'PASSWORD를 입력하세요')">PASSWORD</button>
+  </section> -->
+
+  <!-- addEventListener 버전 -->
+  <section>
+    <div class="alert_box">
+      알림창
+      <a id="btnClose">
+        <i class="fa-solid fa-xmark"></i>
+      </a>
+    </div>
+    <button class="btnOpen">ID</button>
+    <button class="btnOpen">PASSWORD</button>
+    <button class="submit">SUBMIT</button>
+  </section>
+
+
+  <!-- javascript -->
+  <script>
+    const alert = document.querySelector('.alert_box');
+    const samealert = document.getElementsByClassName('alert_box')[0] //alert선언한 것과 동일
+    const btnClose = document.getElementById('btnClose')
+    const btnOpen = document.querySelector('.btnOpen')
+    const btnSubmenu = document.querySelector('.navbar-toggler-icon')
+    const subMenu = document.querySelector('.show')
+    const modal = document.querySelector('.black-bg')
+    const btnSubmit = document.querySelector('.submit')
+    console.log(modal);
+    console.log(btnSubmit);
+
+    //대박..! classList.add/remove했었는데 toggle이 있었다뉘,,,,,, 
+    btnSubmenu.addEventListener('click', () => {
+      subMenu.classList.toggle('show')
+    })
+
+    btnSubmit.addEventListener('click', () => {
+      modal.classList.add('show-modal')
+    })
+
+    document.getElementById('close').addEventListener('click', () => {
+      modal.classList.toggle('show-modal')
+    })
+
+    //event: 유저들이 웹페이지에 조작을 가하는 것들을 의미함
+    //click 외 사용할 수 있는 event : mouseover, scroll 등 
+    //문법 : 선택.addEventListener('event', callback함수)
+    btnClose.addEventListener('click', () => {
+      alert.style.display = 'none';
+    });
+
+    btnOpen.addEventListener('click', () => {
+      alert.style.display = 'block';
+    });
+
+    //함수 2개로 따로 작성해주기 
+    function alertOpen() {
+      alert.style.display = 'block'
+    }
+
+    function alertClose() {
+      alert.style.display = 'none'
+    }
+    //아래 2개 함수 1개로 작성하기 : 매개변수(파라미터) 활용하기 
+    function alertDisplay(current, guide) {
+      alert.style.display = current
+      alert.innerHTML = guide
+    }
+
+    //파라미터 2탄 :가변적인 부분에 사용할 얼마든지 구멍을 뚫어서 사용가능, 여러개 사용하는 것도 가능
+    function plus(a) {
+      2 + a
+    }
+    plus(2);
+
+
+    // // jQuery
+    // // 이런 자바스크립트를 
+    // document.querySelector('.navbar-toggler-icon').addEventListener('click', ()=> {
+    //   document.querySelectorAll('.list-group')[0].classList.toggle('show');
+    // })
+    // // 제이쿼리로 바꾼다면 
+    // $('.navbar-toggler-icon').on('click', ()=> {
+    //   document.querySelectorAll('.list-group')[0].classList.toggle('show');
+    // })
+    // //장점1. 함수명이 짧아짐
+    // document.querySelector('.hello').innerHTML = '바보';
+    // $('.hello').html('바보');
+    // $('.hello').css('color', 'red')
+    // $('.hello').addClass('show')
+    // $('.hello').hide()
+    // $('.hello').slideUp()
+    // $('.hello').fadeIn()
+
+    // //장점2. 여러줄에 작성하는 것을 한줄에 작성 가능함
+    // document.querySelector('.hello')[0].innerHTML = '바보';
+    // document.querySelector('.hello')[1].innerHTML = '바보';
+    // document.querySelector('.hello')[2].innerHTML = '바보';
+
+    // $('.hello').html('바보');
+
+    //장점3. 코드가 짧아짐 : $로 클래스 찾고, addEventListener는 on으로 짧게 작성
+  </script>
+</body>
+
+</html>
