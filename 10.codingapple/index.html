@@ -25,7 +25,16 @@
   <div class="black-bg">
     <div class="white-bg">
       <h4>로그인하세요</h4>
-      <button class="btn btn-dark" id="close">닫기</button>
+      <form action="success.html">
+        <div class="my-3">
+          <input type="text" class="form-control" id="email">
+        </div>
+        <div class="my-3">
+          <input type="password" class="form-control" id="pw">
+        </div>
+        <button type="submit" class="btn btn-primary" id="send">전송</button>
+        <button type="button" class="btn btn-danger" id="close">닫기</button>
+      </form>
     </div>
   </div>
 
@@ -48,6 +57,10 @@
     <li class="list-group-item">And a fifth one</li>
   </ul>
 
+  <div class="main-bg">
+    <h4>Shirt on Sale</h4>
+    <button id="login" class="btn btn-danger">login</button>
+  </div>
 
   <!-- onClick 버전 -->
   <!-- <section>
@@ -85,15 +98,27 @@
     const subMenu = document.querySelector('.show')
     const modal = document.querySelector('.black-bg')
     const btnSubmit = document.querySelector('.submit')
-    console.log(modal);
-    console.log(btnSubmit);
+    const sendLogin = document.getElementById('send')
+    // const loginClose = document.querySelector('.close')
+    const btnLogin = document.getElementById('login')
+    const id = document.getElementById('email')
+    const pw = document.getElementById('pw')
+    console.log(id.value);
+
+    //modal : 전송버튼 누르면 input에 입력한 값이 공백이면 알림창 띄워주세요
+    sendLogin.addEventListener('submit', () => {
+      if(id.value == '') {
+        // e.preventDefault();
+        alert('아이디를 입력해주세요');
+      }
+    })
 
     //대박..! classList.add/remove했었는데 toggle이 있었다뉘,,,,,, 
     btnSubmenu.addEventListener('click', () => {
       subMenu.classList.toggle('show')
     })
 
-    btnSubmit.addEventListener('click', () => {
+    btnLogin.addEventListener('click', () => {
       modal.classList.add('show-modal')
     })
 

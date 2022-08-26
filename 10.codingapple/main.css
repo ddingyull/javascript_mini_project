@@ -30,7 +30,8 @@ i:hover{
 }
 
 .show{
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
   opacity: 0;
 }
 
@@ -64,4 +65,9 @@ i:hover{
   background: white;
   border-radius: 5px;
   padding: 30px;
+}
+
+.main-bg{
+  padding: 100px 20px;
+  background-color: lightgrey;
 }
