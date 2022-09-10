@@ -40,6 +40,42 @@ let menuShow = document.querySelector('.list-group')
 // login버튼 누르면 모달창 나오게하기
 let loginBtn = document.getElementById('login')
 let modal = document.querySelector('.black-bg')
+// 모달창 띄우기
 loginBtn.addEventListener('click', () => {
   modal.classList.add('modalOn')
+})
+// 모달창 닫기
+document.querySelector('.modalClose')
+.addEventListener('click', () => {
+  modal.classList.remove('modalOn')
+})
+
+
+
+// form
+// 전송버튼 누르면 input에 입력한 값이 공백이면 알림창 띄우기????
+let submit = document.querySelector('.submit')
+console.log(submit);
+submit.addEventListener('click', () => {
+  if(document.getElementById('email').value == ''){
+    alert('id값을 작성해주시길 바랍니다')
+  }
+
+  if(document.getElementById('email').value.length == ''){
+    alert('id값을 작성해주시길 바랍니다')
+  }
+})
+
+
+// dark, light모두
+let count = 0;
+let mode = document.querySelector('.badge')
+mode.addEventListener('click', () => {
+  count += 1;
+  if(count % 2 == 0) {
+    mode.innerHTML = 'dark'
+  } else {
+    mode.innerHTML = 'light'
+  }
+  // mode.classList.add('dark')
 })

@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <!-- fontawesome -->
   <script src="https://kit.fontawesome.com/94132462d8.js" crossorigin="anonymous"></script>
   <!-- bootstrap cdn -->
@@ -16,12 +17,13 @@
   <title>Submenu</title>
 </head>
 
-<body>
+<body class="light">
 
   <!-- nav bar -->
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
       <span class="navbar-brand">Navbar</span>
+      <span class="badge bg-dark">Dark</span>
       <button class="navbar-toggler" type="button">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -38,14 +40,23 @@
   </ul>
 
   <!-- 로그인 버튼 누르면 모달창 나오게 하기 -->
-  <button id="login" class="btn btn-dark">login</button>
+  <!-- <img src="./img/diaryHome.png" alt=""> -->
 
+  <button id="login" class="btn btn-warning">login</button>
   <div class="black-bg">
     <div class="white-bg">
       <h4>로그인하세요</h4>
-      <button class="btn btn-danger" id="close">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+      <!-- 제출하는 form -->
+      <form action="success.html">
+        <div class="my-3">
+          <input type="text" class="form-control" id="email">
+        </div>
+        <div class="my-3">
+          <input type="password" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-danger submit">전송</button>
+        <button type="button" class="btn btn-dark modalClose">닫기</button>
+      </form>
     </div>
   </div>
 

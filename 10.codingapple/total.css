@@ -1,3 +1,7 @@
+body.dark{
+  background-color: #000;
+  color: #fff;
+}
 /* alertbox css */
 /* 내가 작성한 css코드  */
 .alert_box{
@@ -25,12 +29,19 @@
 
 
 /* submenu css */
+img{
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
 .list-group{
   display: none;
 }
 
 .show{
   display: block;
+  z-index: 4;
 }
 
 /* 모달창 css */
@@ -48,13 +59,13 @@
   padding: 30px;
   display: none;
 }
+.black-bg.modalOn {
+  display: block;
+}
+
 .white-bg {
   background: white;
   border-radius: 5px;
   padding: 30px;
-}
-
-.black-bg.modalOn {
-  display: block;
 }
 
