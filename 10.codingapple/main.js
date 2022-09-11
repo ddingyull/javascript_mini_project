@@ -1,10 +1,24 @@
 /**
  * [🍯 javascript 꿀팁들]
- * 요소 가져오는 셀럭터들~! 
+ * <요소 가져오는 셀럭터들~!> 
  * 1) querySelector : . # 태그 등 어떤 걸 불러오는지 표기해서 가져올 것
  * 2) getElementsByClassName('클래스이름')[0] : 인덱싱을 통해 몇번째 클래스인지 지어해줄것 
  * 3) getElementById : id만 가져올 수 있음 
  * 4) querySelectorAll : 해당하는 클래스 또는 아이디 여러개 한번에 가져오기 
+ * 
+ * <문자 들어있는지 확인하는 방법들~!>
+ * 1) 'abc'.includes('ab) : 단, 영어, 한글, 숫자가 1회라도 있는지 등은 확인 X
+ * 2) 정규식) /검사할문자/.test('있는지 확인하고싶은 문자열')
+ * - /[a-z]/.test('abcd')
+ * - /[A-Z]/.test('abcdA')
+ * - /[a-zA-Z]/.test('abcdA')
+ * - /[ㄱ-ㅎ가-힣]/.test('바보')
+ * - /[0-9]/.test('바보')
+ * - /\S/.test('바보') : 아무 문자 하나라도 있는가
+ * - /^a/.test('a바보') : a로 시작하느지
+ * - /a$/.test('a바보') : a로 끝나는지
+ * - /(a|b)/.test('a바보') : a 또는 b가 있는지
+ * - /\S+@\S+\.\S+/.test('aaa@bbb.ccc') : 이메일 검사
  * */ 
 
 
@@ -61,6 +75,10 @@ submit.addEventListener('click', () => {
     alert('id값을 작성해주시길 바랍니다')
   }
 
+  if(/\S+@\S+\.\S+/.test('aaa@bbb.ccc')){
+    alert('이메일 형식 아닙니다')
+  }
+
   if(document.getElementById('email').value.length == ''){
     alert('id값을 작성해주시길 바랍니다')
   }
@@ -79,3 +97,108 @@ mode.addEventListener('click', () => {
   }
   // mode.classList.add('dark')
 })
+
+// setTimeout
+
+// 5초 뒤에 사라지게 만들기 (외부에서 만든 함수를 넣어서 사용하는 것도 가능 (함수()가아니라 함수만 쓰면 됨)
+// setTimeout(() => {
+//   document.querySelector('.setTimeoutAlert').style.display = 'none' //javascript 함수
+//   // $('.setTimeoutAlert').hide() //jQuery함수 
+// }, 5000)
+
+let countNum = 5;
+setInterval(() => {
+  countNum -= 1;
+  if(0 < countNum) {
+    document.querySelector('.num').innerHTML = countNum
+  } else if(0 == countNum){
+    document.querySelector('.setTimeoutAlert').style.display = 'none'
+  }
+}, 1000)
+
+// 5초마다 사라지게 만들기 
+// setInterval(()=>{
+//   document.querySelector('.setTimeoutAlert').style.display = 'none' //보통 setInerval에 이런 코드 안쓰는듯
+// }, 1000)
+
+// carousel : 버튼에 따라 이미지 변화되는 애니메이션 기능
+let slideContainer = document.querySelector('.slide-container')
+let slide1 = document.querySelector('.slide-1')
+let slide2 = document.querySelector('.slide-2')
+let slide3 = document.querySelector('.slide-3')
+let slideNext = document.querySelector('.slide-next')
+let slideForward = document.querySelector('.slide-forward')
+
+
+slide1.addEventListener('mouseover', () => {
+  slideContainer.style.transform = 'translateX(0vw)'
+})
+slide2.addEventListener('mouseover', () => {
+  slideContainer.style.transform = 'translateX(-100vw)'
+})
+slide3.addEventListener('mouseover', () => {
+  slideContainer.style.transform = 'translateX(-200vw)'
+})
+
+// carousel : forward 버튼 기능
+// let present = 1;
+
+// slideNext.addEventListener('click', () => {
+//   if(present == 1) {
+      // slideContainer.style.transform = 'translateX(-100vw)'
+//     present += 1;
+//   } else if(present == 2) {
+      // slideContainer.style.transform = 'translateX(-200vw)'
+//     present += 1;
+//   } else{
+      // slideContainer.style.transform = 'translateX(0vw)'
+//     present = 1
+//   }
+// })
+
+// 위 코드 효율적으로 수정해보기
+let present = 0;
+slideNext.addEventListener('click', () => {
+  slideContainer.style.transform = `translateX(-${present}00vw)`
+  if(present < 2) {
+    present += 1;
+  } else {
+    present = 0;
+  }
+})
+
+// carousel : next 버튼 기능
+slideForward.addEventListener('click', () => {
+  if(present == 1) {
+    slideContainer.style.transform = 'translateX(-200vw)'
+    present += 2;
+  } else if(present == 3) {
+    slideContainer.style.transform = 'translateX(-100vw)'
+    present -= 1;
+  } else {
+    slideContainer.style.transform = 'translateX(0vw)'
+    present -= 1;
+  }
+})
+
+// scroll하면 로고 작아지도록 만들기
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 218) {
+    document.querySelector('.navbar-brand').style.fontSize = '20px'
+  } else {
+    document.querySelector('.navbar-brand').style.fontSize = '30px'
+  }
+})
+
+// 이용약관 다 읽었을 경우 체크할 수 있도록 만들기
+document.querySelector('.promise').addEventListener('scroll', () => {
+  let text = document.querySelector('.promise')
+  let scrollHow = text.scrollTop;
+  let scrollHeight = text.scrollHeight;
+  let height = text.clientHeight;
+
+  if(scrollHow + height > scrollHeight - 10) {
+    alert('이용약관 모두 확인하였음')
+  }
+})
+
