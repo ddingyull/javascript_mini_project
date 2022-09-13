@@ -19,6 +19,12 @@
  * - /a$/.test('a바보') : a로 끝나는지
  * - /(a|b)/.test('a바보') : a 또는 b가 있는지
  * - /\S+@\S+\.\S+/.test('aaa@bbb.ccc') : 이메일 검사
+ * 
+ * <이벤트리스너 콜백함수에 추가할 수 있는 함수들>
+ * 1) e.target: 지금 이벤트리스너가 달린 곳 알려줌(this써도 같음)
+ * 2) e.currentTarget: 이벤트 기본 동작을 막아줌
+ * 3) e.prevntDefault(): 실행하면 이벤트 기본 동작을 막아줌
+ * 4) e.stopPropagation(): 내 상위요소로의 이벤트 버블링 중단해줌
  * */ 
 
 
@@ -58,12 +64,18 @@ let modal = document.querySelector('.black-bg')
 loginBtn.addEventListener('click', () => {
   modal.classList.add('modalOn')
 })
-// 모달창 닫기
+// 모달창 닫기 : 닫기 버튼 클릭했을 경우
 document.querySelector('.modalClose')
 .addEventListener('click', () => {
   modal.classList.remove('modalOn')
 })
-
+// 모달창 닫기 : 검은 배경 클릭해서 닫을 경우
+document.querySelector('.black-bg')
+.addEventListener('click', (e)=>{
+  if(e.target == document.querySelector('.black-bg'))
+  //  if(e.target == this) : function함수 썼을 경우 this사용 가능
+  modal.classList.remove('modalOn')
+})
 
 
 // form
@@ -201,4 +213,3 @@ document.querySelector('.promise').addEventListener('scroll', () => {
     alert('이용약관 모두 확인하였음')
   }
 })
-
