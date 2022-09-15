@@ -211,5 +211,7 @@ document.querySelector('.promise').addEventListener('scroll', () => {
 
   if(scrollHow + height > scrollHeight - 10) {
     alert('이용약관 모두 확인하였음')
+  } else if(scrollHow + height > scrollHeight - 8) {
+    alert('이용약관이 완성되었습니다.')
   }
 })
