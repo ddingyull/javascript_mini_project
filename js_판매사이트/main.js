@@ -25,6 +25,21 @@
  * 2) e.currentTarget: 이벤트 기본 동작을 막아줌
  * 3) e.prevntDefault(): 실행하면 이벤트 기본 동작을 막아줌
  * 4) e.stopPropagation(): 내 상위요소로의 이벤트 버블링 중단해줌
+ * 
+ * [javascript에서 html 생성하는 법]
+ * 
+ * - 옛날 방법
+ * let a = document.createElement('태그')라고 작성하면 됨 
+ * a.innerHTML = '안녕'하면 p태그에 안녕 들어감
+ * document.querySelector('클래스명').appendChild(a)하면 변수 a를 자식으로 넣음
+ * 
+ * - 요즘 방법 1 :html 만들고 insertAdjacentHTML로 넣어주기
+ * let a = '<p>안녕</p>'; 
+ * document.querySelector('#test').insertAdjacentHTML('beforeend', a);
+ * 
+ * - 요즘 방법 2 : 
+ * var a = '<p>안녕</p>';
+ * document.querySelector('#test').append(a);
  * */ 
 
 
