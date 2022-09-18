@@ -40,6 +40,37 @@
  * - 요즘 방법 2 : 
  * var a = '<p>안녕</p>';
  * document.querySelector('#test').append(a);
+ * 
+ * [메소드]
+ * 1) 문자 정렬하는 메소드 : 배열이름.sort()
+ *    문자 역순정렬은 배열이름.reverse() 또는 아래 함수 사용
+ * 
+ * 2) 숫자 정렬하는 메소드 : 배열이름.sort((a,b) => {return a - b}) 
+ *    숫자 역순정렬은 'a - b'를 'b - a'로 변경하면 됨
+ * 
+ * 3) 원하는 데이터만 뽑아내는 메소드 : 배열이름.filter
+ *    let 새로운배열이름 = 배열이름.filter((a) => {return a < 4})(원본 수정 X)
+ * 
+ * 4) 변혈할 때 사용하는 메소드 : 배열이름.map 
+ *    let 새로운배열이름 = 배열이름.map((a) => {return a * 4})(원본 수정 X)
+ * 
+ * [개발자 도구 application의 storage]
+ * local storage : 브라우저 껐다 켜도 계속 저장되어있음, key:value형태, 문자만 저장 가능
+ * session storage : 브라우저 껐다 키면 사라짐, key:value형태, 문자만 저장 가능
+ * 
+ * 사용법
+ * - 저장하기: localStorage.setItem('이름', 'kim')
+ * - 출력하기: localStorage.getItem('이름') 
+ * - 삭제하기: localStorage.removeItem('이름')
+ * -  {},[] 넣기 : 
+ *    let a = [1,2,3];
+ *    let newA = JSON.stringify(a);
+ *    localStorage.setItem('num', newA)
+ * -  {},[] 꺼내기 : 
+ *    let 꺼낸데이터 = localStorage.getItem('num');
+ *    JSON.parse(꺼낸데이터)[인덱싱가능];
+ * 
+ * mousedown, mouseup, mousemove 
  * */ 
 
 
@@ -150,6 +181,7 @@ setInterval(() => {
 
 // carousel : 버튼에 따라 이미지 변화되는 애니메이션 기능
 let slideContainer = document.querySelector('.slide-container')
+let slideBox = document.querySelector('.slide-box');
 let slide1 = document.querySelector('.slide-1')
 let slide2 = document.querySelector('.slide-2')
 let slide3 = document.querySelector('.slide-3')
@@ -207,6 +239,13 @@ slideForward.addEventListener('click', () => {
     present -= 1;
   }
 })
+
+// carousel : mouse 드래그로 다음 그림 보기 
+slideBox.addEventListener('mousemove', (e)=>{
+  console.log(e.clientX);
+})
+// carousel : mouse 드래그로 다음 그림으로 넘어가기
+
 
 // scroll하면 로고 작아지도록 만들기
 window.addEventListener('scroll', () => {
