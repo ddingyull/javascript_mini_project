@@ -119,7 +119,7 @@ function 해체분석기(letter, variable1, variable2){
 해체분석기`바지${pants} 양말${socks}`
 
 /**
- * 📍...spread operator : []를 제거해주세요 의미 
+ * 📍...spread operator : [],{}를 제거해주세요 의미 
 */
 
 // [] 없애기
@@ -166,6 +166,220 @@ let person2 = {
 
 person.hello.apply(person2, [1,2]) //apply를 사용해서 함수 안의 object가져와서 사용 가능
 person.hello.call(person2, 1,2) //파라미터를 []형태로 안넣어도됨 / 요즘 apply에 파라미터 잘 안넣음
+
+/**
+ * 📍arguments : 모든 파라미터를 출력해줌  단, 옛날문법,,,,💔
+ * 📍rest파라미터 : 원하는 파라미터들만 출력할 수 있음, 파라미터 개수 지정안해줘도됨, 단, rest는 가장 마지막에 1번만 가능
+*/
+function 함수(a,b,c){
+  for(let i = 0; i< arguments.length; i++){
+    console.log(arguments[i]);
+  }
+}
+
+function 함수2(a,b, ...rest){
+  for(let i = 0; i< rest.length; i++){
+    console.log(rest[i]);
+  }
+}
+
+// spread 연습문제 
+// ✅ 연습 1
+// ['김','밥', 1,2,3]
+
+// ✅ 연습 2
+let q = [1,2,3]
+let w = ['you', 'are'];
+let e = function(a,b){
+  console.log([[...q], ...[...w]][1]);
+}
+e(q,w);
+
+// ✅ 연습 3
+function 함수(a=5, b=a*2){
+  console.log(a+b); // 9
+  return 10
+}
+함수(3);
+
+// ✅ 연습 4
+function 함수(a=5, b=a*2){
+  console.log(a+b); // 15
+  return 10
+}
+함수(undefined, undefined);
+
+// ✅ 연습 5
+function array(...rest){
+    console.log(rest);
+  }
+let newArray = array(1,2,3,4,5)
+console.log(newArray);
+
+// ✅ 연습 6
+let number = [1,2,3,4,5,6,6,7,8,6,5,3]
+console.log(Math.max(...number)); 
+
+// ✅ 연습 7
+// function sort(...rest){
+//   for(let i = 0; i<rest.length; i++){
+//     // console.log(...rest[i]);
+//     let letter = [...rest[i]]
+//     letter.sort()
+//     // console.log(letter.sort());
+//   }
+//   // console.log([...rest].sort());
+// }
+function sort(rest){
+    console.log([...rest].sort().join());
+  }
+
+sort('bear')
+
+// ✅ 연습 8
+function 글자세기(letter){
+
+  let result = {}; 
+
+  [...letter].forEach((ele) => {
+    if(letter[ele] > 0) {
+      result[ele] = result[ele] + 1;
+    } else {
+      result[ele] = 1;
+    }
+  })
+  console.log(result);
+}
+
+글자세기('aabbcc')
+
+/**
+ * 📍Primitive / Reference data type
+ *  Primitive: 변수에 그대로 저장되는 데이터타입 
+ *  Reference: {}, [] 자료가 직접 저장되어있지 않음, 저장되어있는 저장소의 위치를 가르키는 화살표가 담겨있음
+*/
+
+/**
+ * 📍Constructor : 비슷한 {}를 찍어낼 수 있는 문법
+*/
+
+let student = { 
+  name : 'kim',
+  age : 15,
+  sayHi(){
+    console.log(`안녕하세요 ${student.name}입니다`);
+  }
+}
+
+function Student(name, age){ // Constructor : 기계 함수를 의미함
+  this.name = name,  // => this : 기계에서 새로 생성되는 {}, instance라고 함
+  this.age = age,
+  this.sayHi= ()=>{
+    console.log(`안녕하세요 ${student.name}입니다`);
+  }
+}
+
+let student1 = new Student('yurim', 44);
+let student2 = new Student();
+
+student1.sayHi('유림')
+
+// constructor
+// ✅ 연습 1
+
+function Store(name, price){
+  this.name = name,
+  this.price = price
+  this.tax = price * .1 
+}
+
+let product1 = new Store('shirt', 60000);
+let product2 = new Store();
+
+console.log(product1.tax);
+
+/**
+ * 📍Prototype : constructor를 만들면 prototype이라는 공간이 자동으로 생김 => 유전자라고 볼 수 있음, 함수만 가능
+ * 동작원리 
+ * 1) 직접 데이터가 있는가?
+ * 2) 부모한테 데이터가 있는가? 순서대로 확인 후 출력됨 
+ * 때문에 본인에게 없어도 부모에게 있을 경우 출력될 수 있음 
+ * 
+ * toString()을 붙여주면 {}를 글자로 바꿔줌
+ * __proto__ : 부모를 찾고 싶을 때 사용하는 메소드
+ * Object.getPrototypeOf(자식)
+*/
+
+let arr1 = [1,2,3]
+let arr2 = new Array(1,2,3)
+
+let 부모 = {name : 'kim'};
+let 자식 = {};
+// 자식.__proto__ = 부모; 
+
+// Prototype
+// ✅ 연습 1
+
+// let 학생1 = { name : 'kim', age : 20 }
+// let 학생2 = { name : 'kang', age : 12 }
+// let 학생3 = { name : 'song', age : 35 }
+
+function Students(name, age){ 
+  this.name = name,  
+  this.age = age
+  // this.sayHi= ()=>{
+  //   console.log(`안녕하세요 ${name}입니다`);
+  // }
+}
+
+Students.prototype.sayHi = function (){
+  console.log(`안녕 나는 ${students.name}이야`);
+}
+
+let 학생1 = new Students('kim', 20)
+let 학생2 = new Students('kang', 12)
+let 학생3 = new Students('song', 35)
+
+console.log(학생1.sayHi());
+console.log(학생2);
+console.log(학생3);
+
+// 방법 2) Object.create(프로토타입object);
+let 부모1 = { name : 'kim', age : 50 };
+let 자식1 = Object.create(부모1); //prototype을 부모로 해주세요라는 의미이기 때문에 data가 바로 보여지진않지만 데이터 가져올 수 있음
+자식1.age = 20; // 그 뒤로 특정 key값을 바꿀 수 있음 
+let 손자 = Object.create(자식);
+
+// 방법 3 constructor 만드는 새로운 방법 
+class 부모2 {
+  constructor(params) {
+    this.name = 'kim';
+    this.sayHi = function(){console.log('hello')}
+  }
+  sayHi = function(){console.log('hello')}
+}
+let 자식2 = new 부모2(params);
+
+// 📍extends : class 복사
+class 할아버지 {
+  constructor(name, name1) {
+    this.name = name;
+    this.name1 = name1;
+    // this.sayHi = function(){console.log('hello')}
+  }
+  sayHi = function(){console.log('hello')}
+}
+// let 할아버지1 = new 할아버지(params);
+class 아버지 extends 할아버지 {
+  constructor(name, name1){ //할아버지 class의 name 파라미터를 그대로 받아오기 위해 super함수에 넣어주기
+    super(name, name1); //extends로 상속받으려면 super라는 함수를 넣어줘야 함 (단순 외우기,,)
+    this.name = 50;
+  }
+  sayHi = function(){console.log('hello')}
+  // super.sayHi(); //부모의 sayHi함수를 실행할 때 사용, 따로 작성하지 않았다면 가까운 프로토타입의 함수로 출력됨 
+};
+
+let 아버지 = new 아버지();
 
 
 
