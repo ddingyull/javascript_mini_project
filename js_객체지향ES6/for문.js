@@ -136,3 +136,22 @@ class 클래스이름 extends HTMLElement {
 customElements.define('컨포넌트 이름', 클래스);
 
 // 위 완료 후 html에 <컨포넌트이름 name="비번"></컨포넌트이름> 넣어주면 끝
+
+/**
+ * 📍 shoadow DOM
+*/
+
+/**
+ * 📍 ?.
+*/
+
+let user = {
+  name : 'kim',
+  // age : {value : 20}
+}
+
+user.age.value;
+user.age?.value; //user.age가 있으면 name을 불러오기
+// . 2r개 이상일 때 ? 문법 사용 가능
+
+undefined ?? '잠깐만요' //오른쪽이 undefined일 때 왼쪽을 보여주기
