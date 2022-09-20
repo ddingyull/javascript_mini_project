@@ -1,5 +1,9 @@
+
+
+
+
 /**
- * // 📍getter/ setter  
+ * 📍getter/ setter  
  * get: return이 있어야함
  * set: param이 있어야함
 */
@@ -69,3 +73,84 @@ let dog = new Dog('말티즈', 'white')
 
 console.log(cat.agePlus);
 console.log(dog.agePlus);
+
+/**
+ *  📍Destructing
+*/
+
+// 원래 선언, 값 빼내는 방법
+let array = [2,3,4]
+let first = array[0]
+let second = array[1]
+// Destructing문법으로 요약하면 아래 코드임
+let [a,b,c] = [2,3,4]
+
+
+// 원래 선언, 값 빼내는 방법
+let object = { name : 'kim', age : 30 } 
+let first1 = object.name
+
+// Destructing문법으로 요약하면 아래 코드임
+let { name : d, age : f } = { name : 'kim', age : 30 } 
+
+// {} 이렇게 넣을 수도 있음
+var hello = 'hi';
+var age = 30;
+var obj = { hello, age }
+
+// ✅ 연습 1 : {}에서 변수 빼내기
+let 신체정보 = {
+  body: {
+    height: 190,
+    weight: 70
+  },
+  size: ["상의 Large", "바지 30인치"],
+};
+
+let {
+  body: {
+    height,
+    weight
+  },
+  size: [ 상의, 하의 ]
+} = 신체정보;
+
+/**
+ * // 📍promise 연습문재
+*/
+
+// ✅ 연습 1
+let imgLoading = new Promise((성공, 실패)=>{
+  let img = document.getElementById('test');
+  img.addEventListener('load', () => {
+    성공();
+  });
+  img.addEventListener('error', () => {
+    실패();
+  });
+});
+
+
+imgLoading.then(()=>{
+  console.log('성공');
+}).catch(()=>{
+  console.log('실패');
+})
+
+// http://codingapple1.github.io/hello.txt
+
+// ✅ 연습 2
+let btnPromise = document.getElementById('btnPromise');
+
+async function btn() {
+  let btnPromise = new Promise((성공, 실패) => {
+    btnPromise.addEventListener('click', ()=> {
+      성공('성공했어요')
+    })
+  })
+  let result = await btnPromise();
+  console.log(result);
+}
+
+btn();
+
